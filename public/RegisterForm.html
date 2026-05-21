@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { margin-bottom: 20px; max-width: 500px; }
+        input, textarea, button { padding: 8px; margin: 5px 0; width: 100%; box-sizing: border-box; }
+        button { width: auto; cursor: pointer; }
+        #result { margin-top: 20px; padding: 15px; border: 1px solid #ccc; display: none; }
+        #result.success { background-color: #d4edda; border-color: #c3e6cb; }
+        #result.error { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h2>Inventory Registration</h2>
+
+    <form id="registerForm">
+        <label for="inventory_name">Name:</label><br>
+        <input type="text" id="inventory_name" name="inventory_name" required><br><br>
+        
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" rows="4"></textarea><br><br>
+        
+        <label for="photo">Photo:</label><br>
+        <input type="file" id="photo" name="photo" accept="image/*"><br><br>
+        
+        <button type="submit">Register</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(document.getElementById('registerForm'));
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    resultDiv.className = 'error';
+                    resultDiv.innerHTML = `<strong>Error:</strong> ${data.error}`;
+                } else {
+                    resultDiv.className = 'success';
+                    resultDiv.innerHTML = `<strong>Success!</strong> Item registered with ID: ${data.id}<br>Name: ${data.inventory_name}`;
+                    document.getElementById('registerForm').reset();
+                }
+                resultDiv.style.display = 'block';
+            } catch (err) {
+                resultDiv.className = 'error';
+                resultDiv.innerHTML = `<strong>Error:</strong> ${err.message}`;
+                resultDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

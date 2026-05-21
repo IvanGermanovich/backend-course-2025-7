@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        .menu { margin: 20px 0; }
+        a { display: inline-block; padding: 10px 20px; margin: 5px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        a:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Inventory Management System</h1>
+    <p>Welcome to the Inventory Management API</p>
+    
+    <div class="menu">
+        <h2>Navigation:</h2>
+        <a href="/RegisterForm.html">Register New Item</a>
+        <a href="/SearchForm.html">Search Item</a>
+        <a href="/docs">API Documentation (Swagger)</a>
+    </div>
+    
+    <hr>
+    
+    <h3>Quick API Reference:</h3>
+    <ul>
+        <li><strong>POST /register</strong> - Register a new item with photo</li>
+        <li><strong>GET /inventory</strong> - Get all items</li>
+        <li><strong>GET /inventory/:id</strong> - Get specific item</li>
+        <li><strong>PUT /inventory/:id</strong> - Update item details</li>
+        <li><strong>DELETE /inventory/:id</strong> - Delete item</li>
+        <li><strong>GET /inventory/:id/photo</strong> - Get item photo</li>
+        <li><strong>PUT /inventory/:id/photo</strong> - Update item photo</li>
+        <li><strong>POST /search</strong> - Search for item by ID</li>
+    </ul>
+</body>
+</html>
