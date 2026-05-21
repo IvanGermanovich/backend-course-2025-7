@@ -1,0 +1,144 @@
+{
+  "info": {
+    "_postman_id": "24e8321f-3dff-40d1-bdc8-99925b226b54",
+    "name": "Inventory API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register Item",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"inventory_name\": \"Laptop\",\n  \"description\": \"Dell XPS 15\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Items",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/inventory",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["inventory"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Item by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/inventory/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["inventory", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Item",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"inventory_name\": \"Updated Laptop\",\n  \"description\": \"Updated Description\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/inventory/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["inventory", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Item",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/inventory/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["inventory", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Item Photo",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/inventory/1/photo",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["inventory", "1", "photo"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Item Photo",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "photo",
+              "type": "file",
+              "src": ""
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3000/inventory/1/photo",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["inventory", "1", "photo"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
