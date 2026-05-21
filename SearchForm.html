@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { margin-bottom: 20px; }
+        input, button { padding: 8px; margin: 5px; }
+        #result { margin-top: 20px; padding: 15px; border: 1px solid #ccc; display: none; }
+        #result.success { background-color: #d4edda; border-color: #c3e6cb; }
+        #result.error { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        img { max-width: 300px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Inventory Search</h1>
+    <form id="searchForm">
+        <label for="id">Item ID:</label>
+        <input type="text" id="id" name="id" required placeholder="Enter item ID">
+        <label for="includePhoto">
+            <input type="checkbox" id="includePhoto" name="includePhoto">
+            Include Photo
+        </label>
+        <button type="submit">Search</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const id = document.getElementById('id').value;
+            const includePhoto = document.getElementById('includePhoto').checked;
+            
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                const url = `/search?id=${encodeURIComponent(id)}${includePhoto ? '&includePhoto=true' : ''}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    resultDiv.className = 'error';
+                    resultDiv.innerHTML = `<strong>Error:</strong> ${data.error}`;
+                } else {
+                    let html = `
+                        <h3>Search Result:</h3>
+                        <p><strong>ID:</strong> ${data.id}</p>
+                        <p><strong>Name:</strong> ${data.inventory_name}</p>
+                        <p><strong>Description:</strong> ${data.description}</p>
+                    `;
+                    
+                    if (data.photo_url) {
+                        html += `<img src="${data.photo_url}" alt="Item Photo">`;
+                    }
+                    
+                    resultDiv.className = 'success';
+                    resultDiv.innerHTML = html;
+                }
+                resultDiv.style.display = 'block';
+            } catch (err) {
+                resultDiv.className = 'error';
+                resultDiv.innerHTML = `<strong>Error:</strong> ${err.message}`;
+                resultDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
